@@ -1,0 +1,31 @@
+#!/bin/bash
+# EventRayl KISS - Script único
+# Uso: ./run up|down|logs|status|clean
+
+case "$1" in
+  up)
+    echo "🚀 EventRayl iniciando..."
+    podman-compose up -d --build
+    echo "✅ Pronto! http://localhost:8000"
+    ;;
+  down)
+    echo "🛑 Parando..."
+    podman-compose down
+    ;;
+  logs)
+    podman-compose logs -f ${2:-}
+    ;;
+  status)
+    podman-compose ps
+    ;;
+  clean)
+    echo "🧹 Limpando..."
+    podman-compose down --volumes --remove-orphans
+    podman system prune -f
+    echo "✅ Limpo!"
+    ;;
+  *)
+    echo "EventRayl KISS"
+    echo "Uso: ./run {up|down|logs|status|clean}"
+    ;;
+esac

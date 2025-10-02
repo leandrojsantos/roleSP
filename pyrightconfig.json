@@ -10,12 +10,12 @@
       "pythonPlatform": "Linux",
       "extraPaths": [
         ".",
-        "./roleSP"
+        "./eventos"
       ]
     }
   ],
   "include": [
-    "roleSP",
+    "eventos",
     "tests"
   ],
   "exclude": [

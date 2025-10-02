@@ -1,0 +1,29 @@
+# EventRayl - Simples e direto com Podman
+# Uso: podman-compose up|down|logs
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: eventos_db
+    environment:
+      POSTGRES_DB: eventos
+      POSTGRES_USER: eventos
+      POSTGRES_PASSWORD: eventos123
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: eventos_backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://eventos:eventos123@db:5432/eventos
+      ENVIRONMENT: development
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

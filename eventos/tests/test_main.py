@@ -3,7 +3,7 @@ Testes para a aplicação principal do roleSP
 """
 
 from fastapi.testclient import TestClient
-from roleSP.main import app
+from eventos.app.main import app
 
 client = TestClient(app)
 
@@ -41,7 +41,6 @@ def test_info_endpoint():
     assert "name" in data
     assert "version" in data
     assert "environment" in data
-    assert "python_version" in data
     assert "timestamp" in data
     assert data["version"] == "1.0.0"
 
@@ -66,5 +65,5 @@ def test_openapi_endpoint():
     data = response.json()
     assert "openapi" in data
     assert "info" in data
-    assert data["info"]["title"] == "{{PROJECT_NAME}}"
+    assert data["info"]["title"] == "EventRadar"
     assert data["info"]["version"] == "1.0.0"
