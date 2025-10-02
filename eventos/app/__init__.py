@@ -1,1 +1,0 @@
-# EventRadar App Module
